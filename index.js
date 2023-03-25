@@ -2,8 +2,8 @@
 /*Bu görevleri yaparken çıktıların doğru çalıştığını kontrol etmeniz için console.log'u sıklıkla kullanmanızı tavsiye ediyoruz.*/
 
 ///////////////Menu Elemanları ///////////////////
-const cay = {isim: "Çay", fiyat: 4, kategori: "İçecekler"};
-const serpmeKahvalti = {isim: "Serpme Kahvaltı", fiyat: 16, kategori:"Kahvaltı"};
+//const cay = {isim: "Çay", fiyat: 4, kategori: "İçecekler"};
+//const serpmeKahvalti = {isim: "Serpme Kahvaltı", fiyat: 16, kategori:"Kahvaltı"};
 
 /* Görev 1a: Nesneler döndüren bir fonksiyon yazın
 	Aşağıdaki MenuElemaniOlustur fonksiyonunu, yukarıda gördüğünüz cay ve serpmeKahvalti (isim, fiyat, kategori) nesnelerini oluşturacak şekilde yazın. 
@@ -14,11 +14,14 @@ const serpmeKahvalti = {isim: "Serpme Kahvaltı", fiyat: 16, kategori:"Kahvaltı
 	Örnek MenuElemaniOlustur('Cheeseburger', 8, 'Burgerler') şunu döndürmeli: {isim: 'Cheeseburger', fiyat: 8, kategori: 'Burgerler'}
 */
 
-
-function MenuElemaniOlustur(/*Kodlar buraya*/){
-	/*Kodlar buraya*/
+function MenuElemaniOlustur(isim, fiyat, kategori) {
+return { isim: isim, fiyat: fiyat, kategori: kategori };
 }
 
+const cay = MenuElemaniOlustur("Çay", 4, "İçecekler");
+const serpmeKahvalti = MenuElemaniOlustur("Serpme Kahvaltı", 16, "Kahvaltı");
+console.log(cay);
+console.log(serpmeKahvalti);
 
 
 /*  Görev 1b (otomatik test yok): 
@@ -30,7 +33,18 @@ function MenuElemaniOlustur(/*Kodlar buraya*/){
 	
 	Örnek: MenuElemaniOlustur("Karışık Pizza",5,"Pizzalar") şunu döndürür: {isim:"Karışık Pizza",fiyat:5,kategori:"Pizzalar"}
 */
-
+function MenuElemaniOlusturmak(isim, fiyat, kategori) {
+	return { isim: isim, fiyat: fiyat, kategori: kategori };
+	
+	}
+	
+	const karisikPizza = MenuElemaniOlusturmak("Karışık Pizza", 5, "Pizzalar");
+	const tavukSis = MenuElemaniOlusturmak("Tavuk Şiş", 12, "Izgara Yemekleri");
+	const dondurma = MenuElemaniOlusturmak("Dondurma", 6, "Tatlılar"); 
+	
+	console.log(karisikPizza);
+	console.log(tavukSis);
+	console.log(dondurma);
 
 
 /* Görev 2: 
@@ -49,9 +63,25 @@ function MenuElemaniOlustur(/*Kodlar buraya*/){
 const burger = {
 	isim: "Burger", 
 	fiyat: 18, 
-	kategori: "Öğle Yemeği", 
-
-}
+	kategori: "Öğle Yemeği",
+	indirim: function(kimlik) {
+	  if (kimlik === "öğretmen" || kimlik === "öğrenci") {
+		return this.fiyat * 0.75;
+	  } else {
+		return this.fiyat * 0.9;
+	  }
+	}
+  };
+  
+  // öğretmenler için indirimli fiyat
+  console.log(burger.indirim("öğretmen")); // 13.5
+  
+  // öğrenciler için indirimli fiyat
+  console.log(burger.indirim("öğrenci")); // 13.5
+  
+  // diğerleri için indirimli fiyat
+  console.log(burger.indirim("diğer")); // 16.2
+  
 
 
 
@@ -71,14 +101,17 @@ const degerlendirmeler = [
 	Yukarıdaki degerlendirmeler dizisini(array) kullanarak:
 	1. Sadece Ahmet'in geribildirimini konsolda görüntüleyin - fonksiyona gerek yok
 */
-
-
+console.log(degerlendirmeler.find(degerlendirme => degerlendirme.isim === "Ahmet").geribildirim);
 
 /*  Görev 4 (ototest yok):  
 	Reyna'nın geribildirimi girilmemiş! Aşağıdakileri uygulayın: (fonksiyona gerek yok) 
 	1. Bu geribildirimi Reyna'nın değerlendirmesine ekleyin - "bu mekan bir harika dostum, yine de garsonun gülümsememesinden puan kırdım"
 	2. degerlendirmeler dizisini konsolda görüntüleyerek çalışmanızı kontrol edin
 */
+
+degerlendirmeler.find(degerlendirme => degerlendirme.isim === "Reyna").geribildirim = "bu mekan bir harika dostum, yine de garsonun gülümsememesinden puan kırdım";
+
+console.log(degerlendirmeler.find(degerlendirme => degerlendirme.isim === "Reyna").geribildirim);
 
 
 
@@ -92,13 +125,22 @@ const degerlendirmeler = [
 	🌟 ÖRNEK: DegerledirmeEkle(degerlendirmeler, 'Hurşut', 2, 'Boktan yemekler!') dizinin sonuna şunu eklemeli: {isim: 'Hurşut', puan: 2, geribildirim: 'Boktan yemekler!'}
 	4. Güncellenmiş diziyi döndürecek
 */
-
-
-function DegerledirmeEkle(/*Kodlar buraya */){
-	/*Kodlar buraya */
+ 
+function DegerlendirmeEkle(evaluations, isim, puan, geribildirim) {
+	const newevaluations = { isim, puan, geribildirim};
+	evaluations.push(newevaluations);
+	return evaluations;
+  }
+  let evaluation = [
+	{ isim: 'Ahmet', puan: 4, geribildirim: 'Harika bir yer!' },
+	{ isim: 'Mehmet', puan: 2, geribildirim: 'Hizmet kötüydü.' }
+  ];
+  
+  evaluation = DegerlendirmeEkle(evaluation, 'Hurşut', 2, 'Boktan yemekler!');
+  
+  console.log(evaluation);
+  // Çıktı: [{ isim: 'Ahmet', puan: 4, geribildirim: 'Harika bir yer!' }, { isim: 'Mehmet', puan: 2, geribildirim: 'Hizmet kötüydü.' }, { isim: 'Hurşut', puan: 2, geribildirim: 'Boktan yemekler!' }]
 	
-}
-
 
 
 /*  Görev 6: 
@@ -111,11 +153,25 @@ function DegerledirmeEkle(/*Kodlar buraya */){
 	Örnek: AnahtardanDegerlendirmeAl(degerlendirmeler,0) şunu döndürmeli: "Nalan isimli kişi 5 puan verdi ve şunları yazdı: Mükemmel atmosfer ve mükemmel vegan seçenekleri!"
 */
 
+const AnahtardanDegerlendirmeAl = (dizi, anahtar) => {
+	const { isim, puan, geribildirim } = dizi[anahtar];
+	return `${isim} isimli kişi ${puan} puan verdi ve şunları yazdı: ${geribildirim}`;
+  };
+  
+  const x = [
+	{ isim: "Nalan", puan: 5, geribildirim: "Mükemmel atmosfer ve mükemmel vegan seçenekleri!" },
+	{ isim: "Kuddusi", puan: 3, geribildirim: "Benim zevkime göre biraz fazla yenilikçi, burger iyi ama fiyatı yüksek" },
+	{ isim: "Kamuran", puan: 4, geribildirim: "eğlenceli bilgiler ve havalı hisler" },
+	{ isim: "Elif", puan: 4.5, geribildirim: "Evimden pek çıkmıyorum ama çıktığımda sadece buraya geliyorum. Şiddetle tavsiye ederim." },
+	{ isim: "Pınar", puan: 3, geribildirim: "atıştırmalıklar harika ve gün içinde çalışmak için güzel bir cafe alanı." },
+	{ isim: "Ahmet", puan: 2, geribildirim: "Bu mekan beni fazla etkilemedi. Menüde özel bir şey yok ve çok pahalı. Atmosferi de ben beğenmedim ama başkaları beğenebilir." },
+	{ isim: "Latife", puan: 4, geribildirim: "Kesinlikle karaoke Cumalarını seviyorum! Yemek ve içki çeşitleri iyi." },
+  ];
+  
+  console.log(AnahtardanDegerlendirmeAl(x, 0)); // Nalan isimli kişi 5 puan verdi ve şunları yazdı: Mükemmel atmosfer ve mükemmel vegan seçenekleri!
+  
 
-function AnahtardanDegerlendirmeAl(/*Kodlar buraya*/) {
-	/*Kodlar buraya*/
 
-}
 
 
 
@@ -130,11 +186,24 @@ function AnahtardanDegerlendirmeAl(/*Kodlar buraya*/) {
 	Örnek: SonDegerlendirmeyiAl(degerlendirmeler) şunu döndürmeli: "Reyna isimli kişi 3.5 puan verdi ve şunları yazdı: bu mekan bir harika dostum, yine de garsonun gülümsememesinden puan kırdım".
 	Not: Eğer 4. görevi başarıyla yaptıysanız kişinin geribildirimi boş görünmemeli
 */
+const degerlendirme = [
+	{ isim: "Nalan", puan: 5, geribildirim: "Mükemmel atmosfer ve mükemmel vegan seçenekleri!" },
+	{ isim: "Kuddusi", puan: 3, geribildirim: "Benim zevkime göre biraz fazla yenilikçi, burger iyi ama fiyatı yüksek" },
+	{ isim: "Kamuran", puan: 4, geribildirim: "eğlenceli bilgiler ve havalı hisler" },
+	{ isim: "Elif", puan: 4.5, geribildirim: "Evimden pek çıkmıyorum ama çıktığımda sadece buraya geliyorum. Şiddetle tavsiye ederim." },
+	{ isim: "Pınar", puan: 3, geribildirim: "atıştırmalıklar harika ve gün içinde çalışmak için güzel bir cafe alanı." },
+	{ isim: "Ahmet", puan: 2, geribildirim: "Bu mekan beni fazla etkilemedi. Menüde özel bir şey yok ve çok pahalı. Atmosferi de ben beğenmedim ama başkaları beğenebilir." },
+	{ isim: "Latife", puan: 4, geribildirim: "Kesinlikle karaoke Cumalarını seviyorum! Yemek ve içki çeşitleri iyi." },
+  ];
+  
+  function SonDegerlendirmeyiAl(degerlendirmeler) {
+  const sonDegerlendirme = degerlendirmeler[degerlendirmeler.length - 1];
+  return `${sonDegerlendirme.isim} isimli kişi ${sonDegerlendirme.puan} puan verdi ve şunları yazdı: ${sonDegerlendirme.geribildirim}`;
+}
 
-
-function SonDegerlendirmeyiAl(/*Kodlar buraya*/) {
-	/*Kodlar buraya*/
-} 
+  
+  
+	
 
 
 
@@ -205,7 +274,7 @@ module.exports = {
 	sa,
 	MenuElemaniOlustur,
 	burger,
-	DegerledirmeEkle,
+	DegerlendirmeEkle,
 	AnahtardanDegerlendirmeAl,
 	SonDegerlendirmeyiAl,
 }
