@@ -201,12 +201,6 @@ const degerlendirme = [
   return `${sonDegerlendirme.isim} isimli kişi ${sonDegerlendirme.puan} puan verdi ve şunları yazdı: ${sonDegerlendirme.geribildirim}`;
 }
 
-  
-  
-	
-
-
-
 /////////////// BONUS  GÖRVLER////////////////////
 
 /**  BONUS 1:  
@@ -223,8 +217,8 @@ const degerlendirme = [
 	]
 */
 
-function PuanaGoreDegerlendirmeAl(/* Kodlar buraya */) {
-    /* Kodlar buraya */
+function PuanaGoreDegerlendirmeAl(degerlendirme,puan) {
+	return degerlendirme.filter(degerlendirme =>degerlendirme.puan >= puan && degerlendirme.puan <puan+1);
 }
 
 
@@ -235,8 +229,8 @@ function PuanaGoreDegerlendirmeAl(/* Kodlar buraya */) {
 	
 */
 
-function UzunDegerlendirmeleriAl(/* Kodlar buraya */) {
-    /* Kodlar buraya */
+function UzunDegerlendirmeleriAl(degerlendirme) {
+return degerlendirme.filter(degerlendirme => degerlendirme.geribildirim.split(" ").length >15);
 }
 
 
@@ -258,10 +252,25 @@ function UzunDegerlendirmeleriAl(/* Kodlar buraya */) {
 */
 
 
-function arabaYapici(/* Kodlar buraya */) {
-    /* Kodlar buraya */
-    
-}
+
+	function arabaYapici(kilometreSayaci) {
+		return {
+		  kilometreSayaci,
+		  surus(mesafe) {
+			this.kilometreSayaci += mesafe;
+			return this.kilometreSayaci;
+		  }
+		};
+	  }
+	  
+	  let araba1 = arabaYapici(30);
+	  
+	  // Array metodları kullanarak surus fonksiyonunu yazmak
+	  araba1.surus = function(mesafe) {
+		this.kilometreSayaci += mesafe;
+		return this.kilometreSayaci;
+	  };
+   
 
 
 /*  Buradan aşağıdaki kodları değiştirmeyin lütfen */
